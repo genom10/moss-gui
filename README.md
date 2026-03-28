@@ -7,6 +7,7 @@ A simple GUI application for managing student assignment submissions and plagiar
 1. **Download Submissions** - Fetch latest submissions from Codeforces contest
 2. **Manage Aliases** - Map student emails to Codeforces handles
 3. **Run MOSS** - Check submissions for plagiarism using MOSS
+4. **Analysis** - Visualize MOSS results as an interactive plagiarism network graph
 
 ## Installation
 
@@ -64,6 +65,17 @@ python main.py
 - Select submission files to check
 - Run MOSS and view results URL
 
+## Page 4: Analysis (Plagiarism Graph)
+
+- Enter MOSS report URL (or import from Grading page)
+- Visualize plagiarism matches as a force-directed network graph
+- Nodes represent students, edges show plagiarism matches
+- Edge thickness and color indicate match percentage (green → yellow → red)
+- **Field caching:** MOSS URL is cached to `moss_result.txt` for quick re-import
+- Adjust cutoff slider to filter low-percentage matches
+- Scroll to zoom, drag to pan the graph
+- Reset view button to return to default zoom/pan
+
 ## Getting Codeforces API Credentials
 
 1. Visit https://codeforces.com/settings/api
@@ -88,7 +100,8 @@ moss-gui/
 │   ├── pages/
 │   │   ├── download_page.py    # Page 1: Download submissions
 │   │   ├── aliases_page.py     # Page 2: Manage aliases
-│   │   └── grading_page.py     # Page 3: MOSS grading
+│   │   ├── grading_page.py     # Page 3: MOSS grading
+│   │   └── analysis_page.py    # Page 4: Plagiarism graph visualization
 │   ├── components/
 │   │   ├── data_table.py       # Reusable table component
 │   │   └── form_inputs.py      # Reusable form components
