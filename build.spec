@@ -1,16 +1,20 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+import os
+
 block_cipher = None
 
-# Collect all app data files
-app_data = [
-    ('app', 'app'),
-    ('aliases', 'aliases'),
-    ('moss_config.json', 'moss_config.json'),
-    ('download_config.json', 'download_config.json'),
-    ('students_aliases.csv', 'students_aliases.csv'),
-    ('requirements.txt', 'requirements.txt'),
-]
+# Collect all app data files (only if they exist)
+app_data = [('app', 'app')]
+
+# Add optional data files if they exist
+for data_file in ['moss_config.json', 'download_config.json', 'students_aliases.csv', 'requirements.txt']:
+    if os.path.exists(data_file):
+        app_data.append((data_file, data_file))
+
+# Create aliases directory if it doesn't exist (it's gitignored)
+if not os.path.exists('aliases'):
+    os.makedirs('aliases', exist_ok=True)
 
 a = Analysis(
     ['main.py'],

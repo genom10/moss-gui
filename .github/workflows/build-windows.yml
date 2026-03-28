@@ -26,6 +26,9 @@ jobs:
     - name: Install PyInstaller
       run: uv pip install pyinstaller
     
+    - name: Create required directories
+      run: mkdir -p aliases
+    
     - name: Build executable
       run: uv run pyinstaller build.spec --clean
     
