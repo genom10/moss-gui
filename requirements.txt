@@ -1,0 +1,7 @@
+# MOSS GUI Application Dependencies
+
+# GUI Framework
+customtkinter>=5.2.0
+
+# HTTP requests for Codeforces API
+requests>=2.28.0

@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debug files
+*_debug.html
+debug/
+*.log
+
+# Textbox caches
+textbox_cache/
+*.textbox_cache
+cache/
+moss_result.txt
+
+# Application data (generated)
+Assignment*/
+*.json
+submissions.csv
+
+#Generated table of student aliases
+students_aliases.csv
+
+# Aliases folder content
+aliases/
