@@ -30,6 +30,34 @@ class DownloadPage(ctk.CTkFrame):
         self._create_ui()
         self._load_saved_data()
 
+    def _extract_contest_id(self, value: str) -> str:
+        """
+        Extract contest ID from a URL or return the value if it's already an ID.
+        Handles URLs like:
+        - https://codeforces.com/gym/679967/problem/A
+        - https://codeforces.com/contest/1234/problem/B
+        - https://codeforces.com/gym/679967
+        """
+        value = value.strip()
+        if not value:
+            return ""
+        
+        # If it's already a number, return as-is
+        if value.isdigit():
+            return value
+        
+        # Try to extract contest ID from URL
+        import re
+        
+        # Pattern for gym or contest URLs
+        # Matches: /gym/679967 or /contest/1234
+        match = re.search(r'(?:gym|contest)/(\d+)', value)
+        if match:
+            return match.group(1)
+        
+        # If no pattern matched, return empty string
+        return ""
+
     def _create_ui(self):
         """Create the page UI."""
         # Main container with two columns
@@ -157,14 +185,17 @@ class DownloadPage(ctk.CTkFrame):
     
     def _download(self):
         """Handle download button click."""
-        contest_id = self.contest_id_entry.get().strip()
+        # Extract contest ID from URL if provided
+        contest_id_raw = self.contest_id_entry.get().strip()
+        contest_id = self._extract_contest_id(contest_id_raw)
+        
         assignment_num = self.assignment_entry.get().strip()
         api_key = self.api_key_entry.get().strip()
         api_secret = self.api_secret_entry.get().strip()
 
         # Validate inputs
         if not contest_id:
-            self.status_label.error("Please enter Contest ID")
+            self.status_label.error("Please enter a valid Contest ID or URL")
             return
         if not assignment_num or not assignment_num.isdigit():
             self.status_label.error("Please enter a valid Assignment Number")
@@ -250,9 +281,11 @@ class DownloadPage(ctk.CTkFrame):
     
     def _open_folder(self):
         """Open the assignment folder in file explorer."""
+        # Extract contest ID from URL if provided
+        contest_id_raw = self.contest_id_entry.get().strip()
+        contest_id = self._extract_contest_id(contest_id_raw)
         assignment_num = self.assignment_entry.get().strip()
-        contest_id = self.contest_id_entry.get().strip()
-        
+
         if not assignment_num or not contest_id:
             return
         
@@ -269,16 +302,24 @@ class DownloadPage(ctk.CTkFrame):
     
     def get_data(self) -> dict:
         """Get page data for other pages."""
+        # Extract contest ID from URL if provided
+        contest_id_raw = self.contest_id_entry.get().strip()
+        contest_id = self._extract_contest_id(contest_id_raw)
+        
         return {
-            'contest_id': self.contest_id_entry.get().strip(),
+            'contest_id': contest_id,
             'assignment_num': self.assignment_entry.get().strip(),
             'submissions': self.submissions_data
         }
 
     def _save_data(self):
         """Save form data to config file."""
+        # Extract contest ID from URL if provided
+        contest_id_raw = self.contest_id_entry.get().strip()
+        contest_id = self._extract_contest_id(contest_id_raw)
+        
         data = {
-            'contest_id': self.contest_id_entry.get().strip(),
+            'contest_id': contest_id,
             'assignment_num': self.assignment_entry.get().strip(),
             'api_key': self.api_key_entry.get().strip(),
             'api_secret': self.api_secret_entry.get().strip()
