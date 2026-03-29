@@ -13,6 +13,18 @@ A simple GUI application for managing student assignment submissions and plagiar
 
 ### Using uv (recommended)
 
+**1. Install tkinter (system dependency):**
+
+tkinter is required for the GUI but is not installed by uv/pip. Install it first:
+
+- **Ubuntu/Debian:** `sudo apt-get install python3-tk`
+- **Fedora:** `sudo dnf install python3-tkinter`
+- **Arch Linux:** `sudo pacman -S tk`
+- **Windows:** Included with Python (ensure "tcl/tk and IDLE" is checked during install)
+- **macOS:** `brew install python-tk`
+
+**2. Install uv and dependencies:**
+
 ```bash
 # Install uv if you haven't already
 curl -LsSf https://astral.sh/uv/install.sh | sh
