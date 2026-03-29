@@ -177,10 +177,8 @@ class MossGUIApp(ctk.CTk):
 def main():
     """Application entry point."""
     # Verify we're in the moss-gui directory
-    if not os.path.exists("aliases") and not os.path.exists("Assignment1"):
-        print("Please run this application from the moss-gui directory.")
-        print("Usage: cd /path/to/moss-gui && python main.py")
-        sys.exit(1)
+    if not os.path.exists("aliases"):
+        os.mkdir("aliases")
 
     # Start application
     app = MossGUIApp()
