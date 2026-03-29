@@ -11,7 +11,6 @@ A simple GUI application for managing student assignment submissions and plagiar
 
 ## Installation
 
-### Using uv (recommended)
 
 **1. Install tkinter (system dependency):**
 
@@ -22,6 +21,8 @@ tkinter is required for the GUI but is not installed by uv/pip. Install it first
 - **Arch Linux:** `sudo pacman -S tk`
 - **Windows:** Included with Python (ensure "tcl/tk and IDLE" is checked during install)
 - **macOS:** `brew install python-tk`
+
+### Using uv (recommended)
 
 **2. Install uv and dependencies:**
 
